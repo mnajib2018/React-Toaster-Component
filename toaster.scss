@@ -1,0 +1,63 @@
+@mixin Toaster() {
+  .Toaster {
+    width: 400px;
+    border: 1px solid $border-color--base;
+    // toaster should be positioned on the bottom right of the viewport
+    border-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    // needs to sit above page
+    z-index: 1;
+    &-header {
+      height: 50px;
+      &--primary {
+        background-color: $bg-color--cool;
+        .Toaster-icon,
+        .Toaster-title {
+          color: $text-color--light;
+        }
+      }
+      &--secondary {
+        background-color: $bg-color--primary;
+        .Toaster-icon,
+        .Toaster-title {
+          color: $text-color--white;
+        }
+      }
+    }
+    &-header,
+    &-toggle,
+    &-close {
+      position: relative;
+    }
+    &-toggle,
+    &-close {
+      top: 25%;
+      &--right {
+        right: 2%;
+        float: right;
+      }
+      &--left {
+        left: 2%;
+      }
+    }
+    &-toggle {
+      transition: transform .5s ease;
+      // toggle icon should rotate when minimized to point upwards to cue the customer to click it to expand the toaster
+      &.is-minimized {
+        transform: rotate(-180deg);
+      }
+    }
+    &-title {
+      @include SF-PositionCenter('both');
+    }
+    &-body {
+      background: $bg-color--white;
+      min-height: 200px;
+      &.is-minimized {
+        display: none;
+      }
+    }
+  }
+}
